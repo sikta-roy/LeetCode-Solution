@@ -1,0 +1,18 @@
+//Keep min<mid. A value above $mid$ finishes the triplet; otherwise update $mi$ if it is no larger, else update mid. 
+//The old index of $mid$ need not be stored: it already sits after a smaller min.
+class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        int min=Integer.MAX_VALUE, mid=Integer.MAX_VALUE;
+        for(int n:nums)
+        {
+            if(n>mid)
+                return true;
+            if(n<=min)
+                min=n;
+            else
+                mid=n;
+        }
+        return false;
+        
+    }
+}

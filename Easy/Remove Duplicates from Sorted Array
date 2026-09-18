@@ -1,0 +1,29 @@
+Solution 1:
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int l=nums.length;
+        int c=0;
+        for(int i=0;i<l;i++)
+        {
+            if(nums[i]!=nums[c])
+            {
+                nums[++c]=nums[i];
+            }
+        }
+        return c+1;
+        
+    }
+}
+
+Solution 2:
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k = 0;
+        for (int x : nums) {
+            if (k == 0 || x != nums[k - 1]) {
+                nums[k++] = x;
+            }
+        }
+        return k;
+    }
+}

@@ -1,0 +1,71 @@
+Number of 1 Bits (Hamming Weight)
+
+Solution 1
+
+class Solution {
+    public int hammingWeight(int n) {
+        int c=0;
+        if(n==0)
+            return 0;
+        while(n>0)
+        {
+           if(n%2==1)
+               c++;
+            n=n/2;
+            
+        }
+        return c;
+        
+    }
+}
+
+Solution 2: Brian Kernighan's Algorithm
+
+java
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int ans = 0;
+        while (n != 0) {
+            n &= n - 1;
+            ++ans;
+        }
+        return ans;
+    }
+}
+
+Logic:
+Subtracting 1 from n flips its lowest 1 bit to 0 and turns all the 0s after it into 1s. When we AND this with n, those bits cancel out, so the lowest 1 bit is removed. Each loop removes one 1 bit and adds 1 to the count. When n becomes 0, the count is the answer.
+
+Example: n = 12 (1100)
+
+1100 & 1011 = 1000 → ans = 1
+1000 & 0111 = 0000 → ans = 2
+
+The check is n != 0 (not n > 0), so negative numbers also work.
+Time: O(k), where k is the number of 1 bits (at most 32).
+
+Solution 3: Lowest Set Bit Removal
+
+java
+public class Solution {
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int ans = 0;
+        while (n != 0) {
+            n -= (n & -n);
+            ++ans;
+        }
+        return ans;
+    }
+}
+
+Logic:
+In Java, -n is stored as "flip all bits of n, then add 1". So n & -n keeps only the lowest 1 bit of n. Subtracting this value from n removes that bit. Each loop removes one 1 bit and adds 1 to the count. When n becomes 0, the count is the answer.
+
+Example: n = 12 (1100)
+
+n & -n = 0100, so 1100 − 0100 = 1000 → ans = 1
+n & -n = 1000, so 1000 − 1000 = 0000 → ans = 2
+
+Time: O(k), where k is the number of 1 bits (at most 32).
